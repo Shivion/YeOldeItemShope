@@ -1,0 +1,25 @@
+14% Safe
++ 16% required
+
+Front Page 2%
+Product Page 2%
+Filtered Pages 2%
+Partials 2%
+Condition partials 2%
+order and where queries 2%
+non-scaffolded controllers and routes 2%
+git 2%
+
+33% unsafe
+
+Category pages 2%
+Search 10% 
+Link to admin 9% ?
+pagination 2%
+login with address 5%
+Contact and About Page (Editable)5%
+
+7% future
+
+bootstrap 2%
+30 git commits 5%
