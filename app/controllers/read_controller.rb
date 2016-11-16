@@ -8,10 +8,10 @@ class ReadController < ApplicationController
     @items = Item.all
   end
   def new_items
-    @new_items = Item.order(created_at: :desc).limit(5)
+    @items = Item.order(created_at: :desc)
   end
   def category
-    @staff_items = Item.joins(category_item: :category)\
-      .where(categories: {name: params}[category]).limit(5)
+    @items = Item.joins(category_item: :category)\
+      .where(categories: {name: params[category]})
   end
 end
