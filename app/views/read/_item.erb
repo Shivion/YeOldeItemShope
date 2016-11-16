@@ -1,0 +1,14 @@
+<div class="item">
+  <% if(!item.name.empty?) then %>
+  <p><%= item.name %></p>
+  <% end %>
+  <% if(!item.image.nil?) then %>
+  <%= image_tag(item.image) %>
+  <% end %>
+  <% if(!item.description.empty?) then %>
+  <p><%= item.description %></p>
+  <% end %>
+  <% if(!item.price.nil?) then %>
+  <p><%= item.price %></p>
+  <% end %>
+</div>
