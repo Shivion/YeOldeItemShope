@@ -6,3 +6,7 @@
 <div class="itemWrap">
   <%= render partial: "item", collection: @new_items %>
 </div>
+<h1><%= link_to "Items On Sale", items_on_sale_path%></h1>
+<div class="itemWrap">
+  <%= render partial: "item", collection: @items_on_sale %>
+</div>

@@ -8,11 +8,11 @@
   <p><%= @item.description %></p>
 <% end %>
 <% if(!@item.price.nil?) then %>
-  <p><%= @item.price.to_s + " gold" %></p>
+  <p><%= @item.price.floor.to_s + " gold" %></p>
 <% end %>
 <% if(@item.percentage_off != 0 && !@item.percentage_off.nil?) then %>
-  <p><%= @item.percentage_off.to_s + "% Off" %></p>
-  <p><%= (@item.price - (@item.percentage_off * @item.price * 0.01)).to_s + " gold" %></p>
+  <p><%= @item.percentage_off.floor.to_s + "% Off" %></p>
+  <p><%= (@item.price - (@item.percentage_off * @item.price * 0.01)).floor.to_s + " gold" %></p>
 <% end %>
 <% if(@item.stock == 0) then %>
   <p>Out of stock</p>

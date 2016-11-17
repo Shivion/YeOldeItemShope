@@ -3,7 +3,7 @@ class ReadController < ApplicationController
     @staff_items = Item.joins(category_item: :category)\
       .where(categories: {name: 'Staff Picks'}).limit(5)
     @new_items = Item.order(created_at: :desc).limit(5)
-    @sale_items = Item.where(:percentage_off > 0).limit(5)
+    @items_on_sale = Item.where('percentage_off > 0').limit(5)
     get_categories
   end
   def index
@@ -21,7 +21,7 @@ class ReadController < ApplicationController
     get_categories
   end
   def items_on_sale
-    @items = Item.where(:percentage_off > 0)
+    @items = Item.where('percentage_off > 0')
     get_categories
   end
   def item
