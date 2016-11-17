@@ -12,7 +12,7 @@ git 2%
 Category pages 2%
 Search 10% 
 
-33% unsafe
+21% unsafe
 
 Link to admin 9% ?
 pagination 2%

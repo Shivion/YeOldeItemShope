@@ -14,6 +14,8 @@ class ReadController < ApplicationController
     @items = Item.joins(category_item: :category)\
       .where("categories.name IS ? AND items.name LIKE ?"\
       ,*["#{params["category"]}","%#{params["search"]}%"])
-      #categories: {name: params["category"]} & items: {"name LIKE ?", "%#{params[search]}%"})
+  end
+  def other
+    @page = Page.where("name IS ?", "#{params["page"]}").first
   end
 end
