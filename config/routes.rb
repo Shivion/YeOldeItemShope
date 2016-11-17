@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/new_items', to: 'read#new_items', as: 'new_items'
   get '/category', to: 'read#category', as: 'category'
   get '/other', to: 'read#other', as: 'other'
+  get '/item', to: 'read#item', as: 'item'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

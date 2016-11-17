@@ -8,7 +8,24 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <h1>Ye Olde Item Shope</h1>
+    <!--Probably login-->
+    <div class="nav">
+      <%= link_to "Home", front_page_path%>
+      <!--Link to all user pages-->
+      <!--also put the search here-->
+    </div>
+  </header>
+
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+    <p>Pls no steal</p>
+    <%= link_to "About", other_path(:page => "About") %>
+    <%= link_to "Contact", other_path(:page => "Contact") %>
+    <!--Link to admin, about and contact-->
+  </footer>
 </html>

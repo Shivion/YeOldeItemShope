@@ -1,0 +1,23 @@
+<% if(!@item.name.empty?) then %>
+  <h1><%= @item.name %> </h1>
+<% end %>
+<% if(!@item.image.nil?) then %>
+  <%= image_tag(@item.image) %>
+<% end %>
+<% if(!@item.description.nil?) then %>
+  <p><%= @item.description %></p>
+<% end %>
+<% if(!@item.price.nil?) then %>
+  <p><%= @item.price.to_s + " gold" %></p>
+<% end %>
+<% if(@item.percentage_off != 0 && !@item.percentage_off.nil?) then %>
+  <p><%= @item.percentage_off.to_s + "% Off" %></p>
+  <p><%= (@item.price - (@item.percentage_off * @item.price)).to_s + " gold" %></p>
+<% end %>
+<% if(@item.stock == 0) then %>
+  <p>Out of stock</p>
+<%elsif(@item.stock < 10)%>
+  <p>Almost out of stock</p>
+<%else%>
+  <p>In stock</p>
+<% end %>

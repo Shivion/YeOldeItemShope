@@ -1,6 +1,6 @@
 <div class="item">
   <% if(!item.name.empty?) then %>
-    <p><%= item.name %></p>
+    <p><%= link_to item.name, item_path(:item => item.name) %></p>
   <% end %>
   <% if(!item.image.nil?) then %>
     <%= image_tag(item.image) %>
@@ -9,6 +9,6 @@
     <p><%= item.description %></p>
   <% end %>
   <% if(!item.price.nil?) then %>
-    <p><%= item.price %></p>
+    <p><%= item.price.to_s + " gold" %></p>
   <% end %>
 </div>

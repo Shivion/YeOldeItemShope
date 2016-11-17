@@ -1,4 +1,4 @@
-26% Safe
+31% Safe
 + 4% required
 
 Front Page 2%
@@ -11,13 +11,13 @@ non-scaffolded controllers and routes 2%
 git 2%
 Category pages 2%
 Search 10% 
+Contact and About Page (Editable)5%
 
-21% unsafe
+16% unsafe
 
 Link to admin 9% ?
 pagination 2%
 login with address 5%
-Contact and About Page (Editable)5%
 
 7% future
 
