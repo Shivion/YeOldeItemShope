@@ -10,16 +10,15 @@
 
   <header>
     <h1>Ye Olde Item Shope</h1>
-    <!--Probably login-->
+    <!--login here-->
     <div class="nav">
       <%= link_to "Home", front_page_path%>
-      <!--Link to all user pages-->
-      <!--also put the search here-->
-      <%= form_tag('/index') do %>
-      <div class="search">
-        <%= text_field_tag 'search' %>
-        <%= submit_tag "Search", :name => nil %>
-      </div>
+      <%= form_tag("/index", :method => "get") do %>
+        <div class="search">
+          <%= text_field_tag 'search' %>
+          <%= select_tag 'category', options_from_collection_for_select(@categories, 'name', 'name')%>
+          <%= submit_tag 'Search', :name => nil %>
+        </div>
       <% end %>
     </div>
   </header>
@@ -30,7 +29,6 @@
 
   <footer>
     <p>Pls no steal</p>
-    <!--Link to admin, about and contact-->
     <%= link_to "About", other_path(:page => "About") %>
     <%= link_to "Contact", other_path(:page => "Contact") %>
     <%= link_to 'Admin', admin_dashboard_path %>

@@ -1,20 +1,26 @@
-42% Safe
+TO-DO
+Search all items
+validation
 
-Front Page 2%
-Product Page 2%
-Filtered Pages 2%
-Partials 2%
-Condition partials 2%
-order and where queries 2%
-non-scaffolded controllers and routes 2%
-git 2%
-Category pages 2%
-Search 10% 
-Contact and About Page (Editable)5%
-Link to admin 9%
+41% Safe
 
-14% future
+2.1 Front Page 2%
+2.3 Product Page 2%
+2.4 Filtered Pages 2%
+4.1.4 Partials 2%
+4.1.5 Condition partials 2%
+5.1 git 2%
+2.2 Category pages 2%
+2.6.1, 2.6.2 Search(overall and categorys) 10%
+1.1, 1.2, 1.5 link to admin (login, CRUD, and categorys) 9%
+4.2.1 Rails Validation 2%
+4.2.2 Rails "Model Associations" 2%
+4.2.3 order and where queries 2%
+4.2.4 non-scaffolded controllers and routes 2%
 
+19% future plan/frozen
+
+1.4 Contact and About Page(Editable)5%
 pagination 2%
 login with address 5%
 bootstrap 2%
