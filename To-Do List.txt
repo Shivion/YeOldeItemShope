@@ -1,5 +1,4 @@
-31% Safe
-+ 4% required
+42% Safe
 
 Front Page 2%
 Product Page 2%
@@ -12,14 +11,11 @@ git 2%
 Category pages 2%
 Search 10% 
 Contact and About Page (Editable)5%
+Link to admin 9%
 
-16% unsafe
+14% future
 
-Link to admin 9% ?
 pagination 2%
 login with address 5%
-
-7% future
-
 bootstrap 2%
 30 git commits 5%
