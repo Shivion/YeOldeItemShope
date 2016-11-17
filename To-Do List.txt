@@ -1,5 +1,5 @@
 TO-DO
-validation
+On Sale Section
 
 41% Safe
 
@@ -19,7 +19,7 @@ validation
 
 19% future plan/frozen
 
-1.4 Contact and About Page(Editable)5%
+1.4 Contact and About Page(Editable)5% ???
 pagination 2%
 login with address 5%
 bootstrap 2%
