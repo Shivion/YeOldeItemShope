@@ -5,13 +5,15 @@ class ReadController < ApplicationController
     @new_items = Item.order(created_at: :desc).limit(5)
   end
   def index
-    @items = Item.all
+    @items = Item.where("name LIKE ?", "%#{params[search]}%")
   end
   def new_items
     @items = Item.order(created_at: :desc)
   end
   def category
     @items = Item.joins(category_item: :category)\
-      .where(categories: {name: params[category]})
+      .where("categories.name IS ? AND items.name LIKE ?"\
+      ,*["#{params["category"]}","%#{params["search"]}%"])
+      #categories: {name: params["category"]} & items: {"name LIKE ?", "%#{params[search]}%"})
   end
 end
