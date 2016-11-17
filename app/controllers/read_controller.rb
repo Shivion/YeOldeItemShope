@@ -6,7 +6,7 @@ class ReadController < ApplicationController
     get_categories
   end
   def index
-    if(!params["category"].nil?) then
+    if(!params["category"].nil? | !params["category"] == "") then
       @items = Item.joins(category_item: :category)\
         .where("categories.name IS ? AND items.name LIKE ?"\
         ,*["#{params["category"]}","%#{params["search"]}%"])

@@ -1,5 +1,4 @@
 TO-DO
-Search all items
 validation
 
 41% Safe
