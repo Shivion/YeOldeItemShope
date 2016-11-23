@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/items_on_sale', to: 'read#items_on_sale', as: 'items_on_sale'
   get '/other', to: 'read#other', as: 'other'
   get '/item', to: 'read#item', as: 'item'
+  get '/customer', to: 'read#edit_customer', as: 'edit_customer'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

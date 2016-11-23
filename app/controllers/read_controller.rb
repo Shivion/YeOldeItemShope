@@ -32,6 +32,9 @@ class ReadController < ApplicationController
     @page = Page.where("name IS ?", "#{params["page"]}").first
     get_categories
   end
+  def edit_customer
+
+  end
   private def get_categories
     @categories = Category.all
   end
