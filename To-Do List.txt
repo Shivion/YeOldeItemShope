@@ -26,5 +26,3 @@
 2.5 pagination 2%
 4.1.8 bootstrap 2%
 30 git commits 5%
-
-TO-DO: 

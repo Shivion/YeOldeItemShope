@@ -13,12 +13,14 @@
     <!--login here-->
     <div class="nav">
       <%= link_to "Home", front_page_path%>
-      <%= form_tag("/index", :method => "get") do %>
-        <div class="search">
-          <%= text_field_tag 'search' %>
-          <%= select_tag 'category', options_from_collection_for_select( @categories, 'name', 'name'), include_blank: 'All'%>
-          <%= submit_tag 'Search', :name => nil %>
-        </div>
+      <% if(!@categories.nil?) then %>
+        <%= form_tag("/index", :method => "get") do %>
+          <div class="search">
+            <%= text_field_tag 'search' %>
+            <%= select_tag 'category', options_from_collection_for_select( @categories, 'name', 'name'), include_blank: 'All'%>
+            <%= submit_tag 'Search', :name => nil %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </header>
