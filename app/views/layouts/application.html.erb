@@ -10,9 +10,10 @@
 
   <header>
     <h1>Ye Olde Item Shope</h1>
-    <!--login here-->
     <div class="nav">
+      <!--Link to Home-->
       <%= link_to "Home", front_page_path%>
+      <!-- Search -->
       <% if(!@categories.nil?) then %>
         <%= form_tag("/index", :method => "get") do %>
           <div class="search">
@@ -21,6 +22,12 @@
             <%= submit_tag 'Search', :name => nil %>
           </div>
         <% end %>
+      <% end %>
+      <!--login/out-->
+      <% if(!user_signed_in?) then %>
+        <%= link_to "Login", new_user_session_path %>
+      <% else %>
+        <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
       <% end %>
     </div>
   </header>
