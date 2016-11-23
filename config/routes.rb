@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: 'read#front_page'
   get '/', to: 'read#front_page', as: 'front_page'
   get '/index', to: 'read#index', as: 'index'
