@@ -41,6 +41,7 @@ class ReadController < ApplicationController
         @user.address = "Address"
       end
     end
+    get_categories
   end
   def new_customer
       @user = Customer.where(:email => params['email']).first
@@ -50,6 +51,7 @@ class ReadController < ApplicationController
       @user.email =  params['email']
       @user.address = params['address']
       @user.save
+      get_categories
   end
   private def get_categories
     @categories = Category.all
