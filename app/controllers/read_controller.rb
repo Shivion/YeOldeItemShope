@@ -33,7 +33,23 @@ class ReadController < ApplicationController
     get_categories
   end
   def edit_customer
-
+    if(user_signed_in?) then
+      @user = Customer.where(:email => current_user.email).first
+      if(@user.nil?) then
+        @user = Customer.new
+        @user.email = current_user.email
+        @user.address = "Address"
+      end
+    end
+  end
+  def new_customer
+      @user = Customer.where(:email => params['email']).first
+      if(@user.nil?) then
+        @user = Customer.new
+      end
+      @user.email =  params['email']
+      @user.address = params['address']
+      @user.save
   end
   private def get_categories
     @categories = Category.all
