@@ -61,8 +61,20 @@ class ReadController < ApplicationController
     @user.save
     get_categories
   end
+  def remove_item_from_cart
+    find_cart
+    @new_item = OrderItem.where("item_id IS ? AND order_id IS ?",\
+    *"#{[params['item_id']}", "#{@cart.id}"])
+    @new_item.item_id = params['item_id']
+    @new_item.order_id = @cart.id
+    @new_item.save
+  end
   def add_item_to_cart
     find_cart
+    @new_item = OrderItem.new
+    @new_item.item_id = params['item_id']
+    @new_item.order_id = @cart.id
+    @new_item.save
   end
   private def get_categories
     @categories = Category.all
