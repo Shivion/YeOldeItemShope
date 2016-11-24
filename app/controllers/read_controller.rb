@@ -76,6 +76,10 @@ class ReadController < ApplicationController
     @new_item.order_id = @cart.id
     @new_item.save
   end
+  def cart
+    find_cart
+    @cart_items
+  end
   private def get_categories
     @categories = Category.all
   end
