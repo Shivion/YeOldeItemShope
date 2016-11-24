@@ -1,5 +1,6 @@
 class ReadController < ApplicationController
   def front_page
+    find_cart
     @staff_items = Item.joins(category_item: :category)\
       .where(categories: {name: 'Staff Picks'}).limit(5)
     @new_items = Item.order(created_at: :desc).limit(5)
@@ -7,6 +8,7 @@ class ReadController < ApplicationController
     get_categories
   end
   def index
+    find_cart
     if(!params["category"].nil? | !params["category"] == "") then
       @items = Item.joins(category_item: :category)\
         .where("categories.name IS ? AND items.name LIKE ?"\
@@ -17,22 +19,27 @@ class ReadController < ApplicationController
     get_categories
   end
   def new_items
+    find_cart
     @items = Item.order(created_at: :desc)
     get_categories
   end
   def items_on_sale
+    find_cart
     @items = Item.where('percentage_off > 0')
     get_categories
   end
   def item
+    find_cart
     @item = Item.where("name IS ?", "#{params["item"]}").first
     get_categories
   end
   def other
+    find_cart
     @page = Page.where("name IS ?", "#{params["page"]}").first
     get_categories
   end
   def edit_customer
+    find_cart
     if(user_signed_in?) then
       @user = Customer.where(:email => current_user.email).first
       if(@user.nil?) then
@@ -44,16 +51,29 @@ class ReadController < ApplicationController
     get_categories
   end
   def new_customer
-      @user = Customer.where(:email => params['email']).first
-      if(@user.nil?) then
-        @user = Customer.new
-      end
-      @user.email =  params['email']
-      @user.address = params['address']
-      @user.save
-      get_categories
+    find_cart
+    @user = Customer.where(:email => params['email']).first
+    if(@user.nil?) then
+      @user = Customer.new
+    end
+    @user.email =  params['email']
+    @user.address = params['address']
+    @user.save
+    get_categories
+  end
+  def add_item_to_cart
+    find_cart
   end
   private def get_categories
     @categories = Category.all
+  end
+  private def find_cart
+    @cart = Order.joins(:customers,order_item: :orders)\
+      .where("customer.email IS ?",current_user.email).first(1)
+    if(@cart.nil?) then
+      @cart = Order.new
+      @cart.customer = Customer.where(:email => current_user.email)
+      @cart.save
+    end
   end
 end
