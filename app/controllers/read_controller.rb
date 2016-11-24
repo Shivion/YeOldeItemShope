@@ -63,11 +63,10 @@ class ReadController < ApplicationController
   end
   def remove_item_from_cart
     find_cart
-    @new_item = OrderItem.where("item_id IS ? AND order_id IS ?",\
-    *"#{[params['item_id']}", "#{@cart.id}"])
-    @new_item.item_id = params['item_id']
-    @new_item.order_id = @cart.id
-    @new_item.save
+    item = OrderItem.\
+    where(:item_id => params['item_id'], :order_id => @cart.id).first
+    item.destroy
+    redirect_back fallback_location: cart_path
   end
   def add_item_to_cart
     find_cart
@@ -75,26 +74,27 @@ class ReadController < ApplicationController
     @new_item.item_id = params['item_id']
     @new_item.order_id = @cart.id
     @new_item.save
+    redirect_back fallback_location: front_page_path
   end
   def cart
     find_cart
-    @order_items = OrderItem.joins(order_item: :orders)\
-    .where(:order_id => @cart.id)
+    @order_items = OrderItem.where(:order_id => @cart.id)
     @items = Array.new
     @order_items.each do |order_item|
-      @items.push(Item.where(:id = order_item.id).first)
+      @items.push(Item.where(:id => order_item.id).first)
     end
   end
   private def get_categories
     @categories = Category.all
   end
   private def find_cart
-    @cart = Order.joins(:customers,order_item: :orders)\
-      .where("customer.email IS ?",current_user.email).first(1)
+    @cart = Order.joins(:customer)\
+      .where("customers.email IS ?",current_user.email).first
     if(@cart.nil?) then
       @cart = Order.new
-      @cart.customer = Customer.where(:email => current_user.email)
+      @cart.customer = Customer.where(:email => current_user.email).first
       @cart.save
     end
+    @order_items_count = OrderItem.where(:order_id => @cart.id).count
   end
 end

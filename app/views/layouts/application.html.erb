@@ -13,6 +13,10 @@
     <div class="nav">
       <!--Link to Home-->
       <%= link_to "Home", front_page_path%>
+      <!-- Cart -->
+      <% if(!@order_items_count.nil?) %>
+        <%= link_to "Cart(#{@order_items_count})", cart_path %>
+      <% end %>
       <!-- Search -->
       <% if(!@categories.nil?) then %>
         <div class="search">

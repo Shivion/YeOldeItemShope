@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get '/item', to: 'read#item', as: 'item'
   get '/customer', to: 'read#edit_customer', as: 'edit_customer'
   post '/new_customer', to: 'read#new_customer', as: 'new_customer'
+  post '/add_item_to_cart', to: 'read#add_item_to_cart', as: 'add_item_to_cart'
+  post '/remove_item_from_cart',to: 'read#remove_item_from_cart', as: 'remove_item_from_cart'
+  get '/cart', to: 'read#cart', as: 'cart'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

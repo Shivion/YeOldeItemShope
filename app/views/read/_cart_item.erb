@@ -1,22 +1,24 @@
-<div class="item">
-  <% if(!item.name.empty?) then %>
-    <p><%= link_to item.name, item_path(:item => item.name) %></p>
-  <% end %>
-  <% if(!item.image.nil?) then %>
-    <%= image_tag(item.image) %>
-  <% end %>
-  <% if(!item.description.nil?) then %>
-    <p><%= item.description %></p>
-  <% end %>
-  <% if(!item.price.nil?) then %>
-    <p><%= item.price.floor.to_s + " gold" %></p>
-  <% end %>
-  <% if(item.percentage_off != 0 && !item.percentage_off.nil?) then %>
-    <p><%= item.percentage_off.floor.to_s + "% Off" %></p>
-    <p><%= (item.price - (item.percentage_off * item.price * 0.01)).floor.to_s + " gold" %></p>
-  <% end %>
-  <%= form_tag(remove_item_from_cart) do %>
-    <%= hidden_field_tag 'item', item.id %>
-    <%= submit_tag 'Remove from Cart', :name => nil %>
-  <% end %>
-</div>
+<% if(!cart_item.nil?) %>
+  <div class="item">
+    <% if(!cart_item.name.empty?) then %>
+      <p><%= link_to cart_item.name, item_path(:item => cart_item.name) %></p>
+    <% end %>
+    <% if(!cart_item.image.nil?) then %>
+      <%= image_tag(cart_item.image) %>
+    <% end %>
+    <% if(!cart_item.description.nil?) then %>
+      <p><%= cart_item.description %></p>
+    <% end %>
+    <% if(!cart_item.price.nil?) then %>
+      <p><%= cart_item.price.floor.to_s + " gold" %></p>
+    <% end %>
+    <% if(cart_item.percentage_off != 0 && !cart_item.percentage_off.nil?) then %>
+      <p><%= cart_item.percentage_off.floor.to_s + "% Off" %></p>
+      <p><%= (cart_item.price - (cart_item.percentage_off * cart_item.price * 0.01)).floor.to_s + " gold" %></p>
+    <% end %>
+    <%= form_tag(remove_item_from_cart_path) do %>
+      <%= hidden_field_tag 'item', cart_item.id %>
+      <%= submit_tag 'Remove from Cart', :name => nil %>
+    <% end %>
+  </div>
+<% end %>
