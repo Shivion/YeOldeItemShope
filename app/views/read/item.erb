@@ -21,3 +21,7 @@
 <%else%>
   <p>In stock</p>
 <% end %>
+<%= form_tag(add_item_to_cart) do %>
+  <%= hidden_field_tag 'item', @item.id %>
+  <%= submit_tag 'Add to Cart', :name => nil %>
+<% end %>
