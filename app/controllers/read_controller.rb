@@ -78,7 +78,12 @@ class ReadController < ApplicationController
   end
   def cart
     find_cart
-    @cart_items
+    @order_items = OrderItem.joins(order_item: :orders)\
+    .where(:order_id => @cart.id)
+    @items = Array.new
+    @order_items.each do |order_item|
+      @items.push(Item.where(:id = order_item.id).first)
+    end
   end
   private def get_categories
     @categories = Category.all
