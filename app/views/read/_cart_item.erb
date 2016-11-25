@@ -15,8 +15,4 @@
     <p><%= cart_item.percentage_off.floor.to_s + "% Off" %></p>
     <p><%= (cart_item.price - (cart_item.percentage_off * cart_item.price * 0.01)).floor.to_s + " gold" %></p>
   <% end %>
-  <%= form_tag(remove_item_from_cart_path) do %>
-    <%= hidden_field_tag 'item', cart_item.id %>
-    <%= submit_tag 'Remove from Cart', :name => nil %>
-  <% end %>
 </div>

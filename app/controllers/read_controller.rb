@@ -58,21 +58,35 @@ class ReadController < ApplicationController
     end
     @user.email =  params['email']
     @user.address = params['address']
+    @user.name = "Blank Name"
     @user.save
     get_categories
   end
   def remove_item_from_cart
     find_cart
     item = OrderItem.where(:item_id => params['item'], :order_id => @cart.id).first
-    item.destroy
+    item.quantity = params['quantity'].to_f
+    item.save
+    if !params['remove'].nil? then
+      item.destroy
+    end
     redirect_back fallback_location: cart_path
   end
   def add_item_to_cart
     find_cart
-    @new_item = OrderItem.new
-    @new_item.item_id = params['item_id']
-    @new_item.order_id = @cart.id
-    @new_item.save
+
+    item = OrderItem.where(:item_id => params['item'], :order_id => @cart.id).first
+    if item.nil? then
+      item = OrderItem.new
+      item.item_id = params['item']
+      item.order_id = @cart.id
+      item.quantity = 1
+      item.save
+    else
+      item.quantity += 1
+      item.save
+    end
+
     redirect_back fallback_location: front_page_path
   end
   def cart
@@ -85,12 +99,8 @@ class ReadController < ApplicationController
         @user.address = ""
       end
     end
+    @items = Item.joins(order_item: :order).where("Orders.id IS ?", @cart.id)
     @order_items = OrderItem.where(:order_id => @cart.id)
-    @items = Array.new
-    @order_items.each do |order_item|
-    @items.push(Item.where(:id => order_item.item_id).first)
-
-    end
   end
   def checkout
     find_cart
@@ -102,13 +112,15 @@ class ReadController < ApplicationController
     @categories = Category.all
   end
   private def find_cart
-    @cart = Order.joins(:customer)\
-      .where("customers.email IS ? AND orders.placed IS 0",current_user.email).first
-    if(@cart.nil?) then
-      @cart = Order.new
-      @cart.customer = Customer.where(:email => current_user.email).first
-      @cart.save
+    if user_signed_in? then
+      @cart = Order.joins(:customer)\
+        .where("customers.email IS ? AND orders.placed IS NULL",current_user.email).first
+      if(@cart.nil?) then
+        @cart = Order.new
+        @cart.customer = Customer.where(:email => current_user.email).first
+        @cart.save
+      end
+      @order_items_count = OrderItem.where(:order_id => @cart.id).count
     end
-    @order_items_count = OrderItem.where(:order_id => @cart.id).count
   end
 end

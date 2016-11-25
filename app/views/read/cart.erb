@@ -1,6 +1,22 @@
 <h1>Cart</h1>
 <div class="itemWrap">
-  <%= render partial: "cart_item", collection: @items %>
+  <% @items.each do |item|%>
+    <%= render partial: "item", object: item %>
+    <% item_quantity = 0
+      @order_items.each do |order_item|
+        if order_item.item_id == item.id then
+          item_quantity = order_item.quantity
+        end
+      end %>
+    <%= form_tag(remove_item_from_cart_path) do %>
+    <%= hidden_field_tag 'item', item.id %>
+    <%= label_tag(:quantity, "Quantity") %>
+    <%= text_field_tag(:quantity, item_quantity) %>
+    <%= label_tag(:remove, "Remove All") %>
+    <%= check_box_tag(:remove, true) %>
+    <%= submit_tag 'Update', :name => nil %>
+    <% end %>
+  <% end %>
   <%= form_tag(checkout_path) do %>
     <%= label_tag(:address, "Address") %>
     <%= text_area_tag(:address, @user.address) %>
