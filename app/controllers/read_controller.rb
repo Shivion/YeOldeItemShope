@@ -63,8 +63,7 @@ class ReadController < ApplicationController
   end
   def remove_item_from_cart
     find_cart
-    item = OrderItem.\
-    where(:item_id => params['item_id'], :order_id => @cart.id).first
+    item = OrderItem.where(:item_id => params['item'], :order_id => @cart.id).first
     item.destroy
     redirect_back fallback_location: cart_path
   end
@@ -78,18 +77,33 @@ class ReadController < ApplicationController
   end
   def cart
     find_cart
+    if(user_signed_in?) then
+      @user = Customer.where(:email => current_user.email).first
+      if(@user.nil?) then
+        @user = Customer.new
+        @user.email = current_user.email
+        @user.address = ""
+      end
+    end
     @order_items = OrderItem.where(:order_id => @cart.id)
     @items = Array.new
     @order_items.each do |order_item|
-      @items.push(Item.where(:id => order_item.id).first)
+    @items.push(Item.where(:id => order_item.item_id).first)
+
     end
+  end
+  def checkout
+    find_cart
+    @cart.placed = true
+    @cart.save
+    redirect_back fallback_location: front_page_path
   end
   private def get_categories
     @categories = Category.all
   end
   private def find_cart
     @cart = Order.joins(:customer)\
-      .where("customers.email IS ?",current_user.email).first
+      .where("customers.email IS ? AND orders.placed IS 0",current_user.email).first
     if(@cart.nil?) then
       @cart = Order.new
       @cart.customer = Customer.where(:email => current_user.email).first

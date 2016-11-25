@@ -1,7 +1,7 @@
 <% if(user_signed_in?) then %>
   <%= form_tag(new_customer_path) do %>
-    <%= label_tag(:address, "Address") %>
     <%= hidden_field_tag 'email', @user.email %>
+    <%= label_tag(:address, "Address") %>
     <%= text_area_tag(:address, @user.address) %>
     <%= submit_tag 'Save', :name => nil %>
   <% end %>

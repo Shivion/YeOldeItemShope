@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123194500) do
+ActiveRecord::Schema.define(version: 20161125134532) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20161123194500) do
     t.datetime "updated_at",  null: false
     t.boolean  "paid"
     t.boolean  "shipped"
+    t.text     "address"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 

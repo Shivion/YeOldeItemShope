@@ -1,4 +1,9 @@
 <h1>Cart</h1>
 <div class="itemWrap">
   <%= render partial: "cart_item", collection: @items %>
+  <%= form_tag(checkout_path) do %>
+    <%= label_tag(:address, "Address") %>
+    <%= text_area_tag(:address, @user.address) %>
+    <%= submit_tag 'Checkout', :name => nil %>
+  <% end %>
 </div>

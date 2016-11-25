@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/add_item_to_cart', to: 'read#add_item_to_cart', as: 'add_item_to_cart'
   post '/remove_item_from_cart',to: 'read#remove_item_from_cart', as: 'remove_item_from_cart'
   get '/cart', to: 'read#cart', as: 'cart'
+  post '/checkout', to: 'read#checkout', as: 'checkout'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
