@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  #Can't use style due to an imagemagick? bug
+  has_attached_file :icon#, :styles => { :medium => "300x300", :thumb => "100x100" }
+
   has_many :category_item
   has_many :order_item
   has_many :orders, :through => :order_item

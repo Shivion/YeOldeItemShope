@@ -2,8 +2,8 @@
   <% if(!item.name.empty?) then %>
     <p><%= link_to item.name, item_path(:item => item.name) %></p>
   <% end %>
-  <% if(!item.image.nil?) then %>
-    <%= image_tag(item.image) %>
+  <% if(item.icon.exists?) then %>
+    <%= image_tag item.icon.url %>
   <% end %>
   <% if(!item.description.nil?) then %>
     <p><%= item.description %></p>

@@ -1,8 +1,8 @@
 <% if(!@item.name.empty?) then %>
   <h1><%= @item.name %> </h1>
 <% end %>
-<% if(!@item.image.nil?) then %>
-  <%= image_tag(@item.image) %>
+<% if(@item.icon.exists?) then %>
+  <%= image_tag @item.icon.url %>
 <% end %>
 <% if(!@item.description.nil?) then %>
   <p><%= @item.description %></p>

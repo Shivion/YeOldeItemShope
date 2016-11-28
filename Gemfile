@@ -33,7 +33,14 @@ gem 'jbuilder', '~> 2.5'
 # Required for active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
 gem 'devise'
+
+gem "paperclip", "~> 3.1"
+
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
 
 
 group :development, :test do
