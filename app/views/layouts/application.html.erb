@@ -7,44 +7,51 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <header>
+          <h1>Ye Olde Item Shope</h1>
+          <nav class="navbar navbar-default" >
+            <%= link_to "Home", front_page_path, :class => "navbar-brand"%>
 
-  <header>
-    <h1>Ye Olde Item Shope</h1>
-    <div class="nav">
-      <!--Link to Home-->
-      <%= link_to "Home", front_page_path%>
-      <!-- Cart -->
-      <% if(!@order_items_count.nil?) %>
-        <%= link_to "Cart(#{@order_items_count})", cart_path %>
-      <% end %>
-      <!-- Search -->
-      <% if(!@categories.nil?) then %>
-        <div class="search">
-          <%= form_tag("/index", :method => "get") do %>
-            <%= text_field_tag 'search' %>
-            <%= select_tag 'category', options_from_collection_for_select( @categories, 'name', 'name'), include_blank: 'All'%>
-            <%= submit_tag 'Search', :name => nil %>
-          <% end %>
-        </div>
-      <% end %>
-      <!--login/out-->
-      <% if(!user_signed_in?) then %>
-        <%= link_to "Login", new_user_session_path %>
-      <% else %>
-        <%= link_to "Edit Information", edit_customer_path %>
-        <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
-      <% end %>
+            <!-- Search -->
+            <% if(!@categories.nil?) then %>
+              <div class="search">
+                <%= form_tag("/index", :method => "get", :class => "navbar-form navbar-left") do %>
+                  <div class="form-group">
+                    <%= text_field_tag 'search', 'search', :class => "form-control" %>
+                    <%= select_tag 'category', options_from_collection_for_select( @categories, 'name', 'name'), include_blank: 'All', :class => "form-control input-sm"%>
+                    <%= submit_tag 'Search', :name => nil, :class => "btn btn-default" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+            <ul class="nav navbar-nav right">
+            <% if(!@order_items_count.nil?) %>
+              <li><%= link_to "Cart(#{@order_items_count})", cart_path, {:class => "navbar-brand"} %></li>
+            <% end %>
+            <% if(!user_signed_in?) then %>
+              <li><%= link_to "Login", new_user_session_path %><li>
+            <% else %>
+              <!-- Useless page <li><%= link_to "Edit Information", edit_customer_path %><li>-->
+              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %><li>
+            <% end %>
+            </ul>
+          </nav>
+        </header>
+
+        <%= yield %>
+
+        <footer>
+          <p>Pls no steal</p>
+          <div class="footer-nav">
+            <%= link_to "About", other_path(:page => "About") %>
+            <%= link_to "Contact", other_path(:page => "Contact") %>
+            <%= link_to 'Admin', admin_dashboard_path %>
+          </div>
+        </footer>
+      </div>
     </div>
-  </header>
-
-  <body>
-    <%= yield %>
-  </body>
-
-  <footer>
-    <p>Pls no steal</p>
-    <%= link_to "About", other_path(:page => "About") %>
-    <%= link_to "Contact", other_path(:page => "Contact") %>
-    <%= link_to 'Admin', admin_dashboard_path %>
-  </footer>
+  </div>
 </html>

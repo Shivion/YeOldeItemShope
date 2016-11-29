@@ -1,0 +1,86 @@
+///*
+// * This is a manifest file that'll be compiled into application.css, which will include all the files
+// * listed below.
+// *
+// * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+// * or any plugin's Svendor/assets/stylesheets directory can be referenced here using a relative path.
+// *
+// * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+// * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+// * files in this directory. Styles in this file should be added after the last require_* statement.
+// * It is generally better to create a new file per style scope.
+// *
+// *= require_self
+// *= require_tree .
+// */
+
+//use nesting, variables, inheritance and operators.
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$image-size: 500px;
+$text-color: #333333;
+
+ul.right{
+    float:right;
+}
+
+img{
+  width:$image-size;
+  height:$image-size;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  &.icon{
+    width:$image-size/2;
+    height:$image-size/2;
+  }
+}
+
+a{
+  &:visited{
+    color: $text-color;
+  }
+
+  &:link{
+    @extend :visited;
+  }
+
+  &:hover{
+    @extend :visited;
+  }
+}
+
+footer{
+  margin-top: 10px;
+  font-size: 8pt;
+
+  p{
+    display: inline;
+  }
+
+  div.footer-nav{
+    float:right;
+  }
+}
+
+div.title
+{
+  a
+  {
+    font-size: 15pt;
+    font-weight: bold;
+  }
+}
+
+div.item{
+  border: 1pt solid gray
+}
+
+.checkout-form{
+  margin-top: 25px;
+}
+
+.strike
+{
+  text-decoration: line-through;
+}

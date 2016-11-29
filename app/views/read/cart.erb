@@ -1,25 +1,40 @@
 <h1>Cart</h1>
 <div class="itemWrap">
-  <% @items.each do |item|%>
-    <%= render partial: "item", object: item %>
-    <% item_quantity = 0
+  <% @items.each_with_index do |item,index|%>
+    <div class="row">
+      <%= render partial: "item", object: item %>
+      <% item_quantity = 0
       @order_items.each do |order_item|
         if order_item.item_id == item.id then
           item_quantity = order_item.quantity
         end
       end %>
-    <%= form_tag(remove_item_from_cart_path) do %>
-    <%= hidden_field_tag 'item', item.id %>
-    <%= label_tag(:quantity, "Quantity") %>
-    <%= text_field_tag(:quantity, item_quantity) %>
-    <%= label_tag(:remove, "Remove All") %>
-    <%= check_box_tag(:remove, true) %>
-    <%= submit_tag 'Update', :name => nil %>
-    <% end %>
+      <div class="cart-form col-md-4">
+      <%= form_tag(remove_item_from_cart_path) do %>
+      <%= hidden_field_tag "item" + index.to_s, item.id, :name => "item" %>
+      <div class="form-group">
+        <%= label_tag("quantity" + index.to_s, "Quantity") %>
+        <%= text_field_tag("quantity" + index.to_s, item_quantity, {:class => "form-control", :name => "quantity"}) %>
+      </div>
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag("remove" + index.to_s, true, false, :name => "remove") %> Remove All
+        </label>
+      </div>
+      <div class="form-group">
+        <%= submit_tag("Update", :name => nil, :class => "btn btn-default") %>
+      </div>
+      <% end %>
+      </div>
+    </div>
   <% end %>
-  <%= form_tag(checkout_path) do %>
-    <%= label_tag(:address, "Address") %>
-    <%= text_area_tag(:address, @user.address) %>
-    <%= submit_tag 'Checkout', :name => nil %>
+  <%= form_tag(checkout_path,:class => "checkout-form") do %>
+    <div class="form-group">
+      <%= label_tag(:address, "Address") %>
+      <%= text_area_tag(:address, @user.address, :class => "form-control") %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag 'Checkout', :name => nil, :class => "btn btn-success checkout-submit" %>
+    </div>
   <% end %>
 </div>

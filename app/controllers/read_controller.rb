@@ -2,9 +2,9 @@ class ReadController < ApplicationController
   def front_page
     find_cart
     @staff_items = Item.joins(category_item: :category)\
-      .where(categories: {name: 'Staff Picks'}).limit(5)
-    @new_items = Item.order(created_at: :desc).limit(5)
-    @items_on_sale = Item.where('percentage_off > 0').limit(5)
+      .where(categories: {name: 'Staff Picks'}).limit(6)
+    @new_items = Item.order(created_at: :desc).limit(6)
+    @items_on_sale = Item.where('percentage_off > 0').limit(6)
     get_categories
   end
   def index

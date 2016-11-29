@@ -1,12 +1,12 @@
 <h1><%= link_to "Staff Picks", index_path(:category => "Staff Picks") %></h1>
-<div class="itemWrap">
-  <%= render partial: "item", collection: @staff_items %>
+<div class="itemWrap row">
+    <%= render partial: "item", collection: @staff_items %>
 </div>
 <h1><%= link_to "New Items", new_items_path%></h1>
-<div class="itemWrap">
+<div class="itemWrap row">
   <%= render partial: "item", collection: @new_items %>
 </div>
 <h1><%= link_to "Items On Sale", items_on_sale_path%></h1>
-<div class="itemWrap">
+<div class="itemWrap row">
   <%= render partial: "item", collection: @items_on_sale %>
 </div>
